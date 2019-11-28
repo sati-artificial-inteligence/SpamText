@@ -1,6 +1,6 @@
 Allpackages <- c("ggplot2", "e1071", "caret", "irlba", "randomForest", "dplyr", "devtools", "quanteda")
 
-install.packages(Allpackages)
+#install.packages(Allpackages)
 
 for(i in 1:length(Allpackages)){
   require(Allpackages[i], character.only = TRUE)
@@ -12,6 +12,7 @@ spam.data <- read.csv(
   sep = ",",
   col.names = c("Label", "Text", " ", " ", " ")
 )
+
 spam.data <- spam.data[,1:2]
 
 # Learn if missing data?
@@ -42,9 +43,53 @@ test.data <- spam.data[-indexes, ]
 prop.table(table(train.data$Label))
 prop.table(table(test.data$Label))
 
+train.data.tokens[357]
+
 train.data.tokens <- tokens(
-  
+  x = train.data$Text, 
+  what = "word",
+  remove_numbers = TRUE,
+  remove_punct = TRUE,
+  remove_symbols = TRUE,
+  remove_hyphens = TRUE,
+  remove_url = TRUE
 )
+
+train.data.tokens[357]
+
+train.data.tokens <- tokens_tolower(train.data.tokens)
+
+train.data.tokens[357]
+
+train.data.tokens <- tokens_select(
+  x = train.data.tokens,
+  pattern = stopwords(),
+  selection = "remove"
+)
+
+train.data.tokens[357]
+
+train.data.tokens <- tokens_wordstem(
+  x = train.data.tokens,
+  language = "english"
+)
+
+train.data.tokens[357]
+
+train.data.tokens.dfm <- dfm(
+  x = train.data.tokens
+)
+
+train.data.tokens.matrix <-
+  as.matrix(
+    train.data.tokens.dfm
+  )
+
+View(train.data.tokens.matrix[1:10,1:10])
+
+dim(train.data.tokens.matrix)
+
+colnames(train.data.tokens.matrix)[1:50]
 
 #Free, WINNER, Won look like typical words that are spam
 
