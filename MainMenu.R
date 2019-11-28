@@ -1,4 +1,4 @@
-Allpackages <- c("ggplot2", "e1071", "caret", "irlba", "randomForest", "dplyr", "devtools")
+Allpackages <- c("ggplot2", "e1071", "caret", "irlba", "randomForest", "dplyr", "devtools", "quanteda")
 
 install.packages(Allpackages)
 
@@ -8,7 +8,6 @@ for(i in 1:length(Allpackages)){
 
 
 
-devtools::install_github("quanteda/quanteda")
 
 spam.data <- read.csv(
   file = "spam.csv",
