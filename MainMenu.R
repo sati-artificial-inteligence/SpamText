@@ -6,15 +6,11 @@ for(i in 1:length(Allpackages)){
   require(Allpackages[i], character.only = TRUE)
 }
 
-
-
-
 spam.data <- read.csv(
   file = "spam.csv",
   stringsAsFactors = FALSE,
   sep = ",",
-  col.names = c("Label", "Text", " ", " ", " "),
-  encoding = "UTF-8"
+  col.names = c("Label", "Text", " ", " ", " ")
 )
 spam.data <- spam.data[,1:2]
 
@@ -46,7 +42,9 @@ test.data <- spam.data[-indexes, ]
 prop.table(table(train.data$Label))
 prop.table(table(test.data$Label))
 
-train.data.tokens <- quanteda::tokens
+train.data.tokens <- tokens(
+  
+)
 
 #Free, WINNER, Won look like typical words that are spam
 
